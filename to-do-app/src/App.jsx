@@ -8,7 +8,7 @@ function App() {
     e.preventDefault()
     toDoSet(
       [
-        ...toDo, {activity: activity, active: false}
+        ...toDo, {activity: activity}
       ]
     )
     console.log(toDo);
@@ -19,24 +19,17 @@ function App() {
     console.log(activity)
   }
 
-  const UpdateStatus = (index) => {
-    let toDoArray = [...toDo]
-    toDoArray[index].active = !toDoArray[index].active;
+  const ClearActivity = (i) => {
+    let toDoArray = toDo.filter((activity, index) => {
+      return index != i;
+    })
     toDoSet(toDoArray);
-    console.log(toDo);
+    console.log(i);
   }
 
   const Clear = (e) => {
     e.preventDefault();
     toDoSet([])
-  }
-
-  const ClearFinished = (e) => {
-    e.preventDefault();
-    console.log(toDo)
-    let toDoArray = toDo.filter(activity => activity.active != true)
-    console.log(toDoArray);
-    toDoSet(toDoArray)
   }
 
   return (
@@ -47,7 +40,6 @@ function App() {
           <input type="text" htmlFor="Activity" onChange={UpdateActivity}/>
           <button onClick={SubmitForm}>Submit</button>
           <button onClick={Clear}>Clear</button>
-          <button onClick={ClearFinished}>Clear finished</button>
       </form>
 
       <ul>
@@ -55,8 +47,7 @@ function App() {
           toDo.map((activity, index) => (
             <>
               <li key={index}>{activity.activity}</li>
-              <label htmlFor="Status">Completed: </label>
-              <input type='checkbox' htmlFor="Status" onClick={() => UpdateStatus(index)} checked={activity.status}></input>
+              <button onClick={() => {ClearActivity(index)}}>Clear</button>
             </>
           ))
         }
