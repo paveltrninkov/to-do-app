@@ -1,4 +1,5 @@
-import { act, useState } from 'react'
+import { useState } from 'react'
+import './App.css'
 
 function App() {
   const [toDo, toDoSet] = useState([]);
@@ -33,7 +34,7 @@ function App() {
   }
 
   return (
-    <>
+    <main>
       <h1>To Do App</h1>
       <form action="post">
           <label htmlFor="Activity">Activity: </label>
@@ -46,13 +47,15 @@ function App() {
         {
           toDo.map((activity, index) => (
             <>
-              <li key={index}>{activity.activity}</li>
-              <button onClick={() => {ClearActivity(index)}}>Clear</button>
+              <li key={index}>{activity.activity}
+                 <button onClick={() => {ClearActivity(index)}}>Clear</button>
+              </li>
+              
             </>
           ))
         }
       </ul>
-    </>
+    </main>
   )
 }
 
